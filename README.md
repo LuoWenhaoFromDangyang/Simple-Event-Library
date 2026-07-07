@@ -14,7 +14,7 @@ pip install .
 ```
 Or:
 ```bash
-pip install SimpleELpy==1.0.3
+pip install SimpleELpy==1.0.4
 ```
 
 ## Usage
