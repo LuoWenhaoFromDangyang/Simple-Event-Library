@@ -3,7 +3,7 @@ requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "SplEL"
+name = "SimpleELpy"
 dynamic = ["version"]
 description = "A lightweight event handling library for Python and C/C++."
 readme = { file = "README.md", content-type = "text/markdown" }
@@ -18,7 +18,7 @@ classifiers = [
 ]
 
 [tool.setuptools]
-py-modules = ["splel"]
+py-modules = ["SimplEL"]
 
 [tool.setuptools.dynamic]
 version = { file = "res/common/ver_pure.txt" }

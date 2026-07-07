@@ -6,14 +6,15 @@ Current version: 1.0.0 (see `res/common/ver.txt`)
 
 ## Installation
 
-To install SEL, you can only git clone because the package is not available on PyPI:
+To install SEL, you can:
 ```bash
 git clone https://github.com/LuoWenhaoFromDangYang/Simple-Event-Library.git
 cd Simple-Event-Library
-```
-And then run:
-```bash
 pip install .
+```
+Or:
+```bash
+pip install SimpleELpy==1.0.3
 ```
 
 ## Usage
