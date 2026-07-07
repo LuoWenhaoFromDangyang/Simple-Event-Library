@@ -1,0 +1,35 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "SEL"
+dynamic = ["version"]
+description = "A lightweight event handling library for Python and C/C++."
+readme = "README.md"
+license = { text = "MIT" }
+authors = [
+    { name = "只是一个普通的人偶", email = "3666569527@qq.com" }
+]
+requires-python = ">=3.6"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+]
+
+[tool.setuptools]
+py-modules = ["SEL"]
+
+[tool.setuptools.dynamic]
+version = { file = "res/common/ver_pure.txt" }
+
+[tool.setuptools.packages.find]
+include = ["res", "res.py", "res.common"]
+exclude = []
+
+[tool.setuptools.package-data]
+"res" = ["common/ver.txt", "common/ver_pure.txt"]
+
+[project.urls]
+Repository = "https://github.com/LuoWenhaoFromDangYang/Simple-Event-Library"
+Source = "https://github.com/LuoWenhaoFromDangYang/Simple-Event-Library"
