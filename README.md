@@ -139,7 +139,7 @@ To initialize SEL, you can use functions like these:
 These function returns an integer value indicating the success or failure of the initialization. If the initialization is successful, the function returns 0. If the initialization fails, the function returns a non-zero value.
 
 ## Compiling C/C++ programs
-Since SEL is implemented as header-only (or with a single source file), compile with:
+Compile with:
 ```bash
 gcc -o my_program my_program.c ./res/c/main.c
 ```
