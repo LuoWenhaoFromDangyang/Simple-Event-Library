@@ -3,10 +3,10 @@ requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "SEL"
+name = "SplEL"
 dynamic = ["version"]
 description = "A lightweight event handling library for Python and C/C++."
-readme = "README.md"
+readme = { file = "README.md", content-type = "text/markdown" }
 license = { text = "MIT" }
 authors = [
     { name = "只是一个普通的人偶", email = "3666569527@qq.com" }
@@ -18,7 +18,7 @@ classifiers = [
 ]
 
 [tool.setuptools]
-py-modules = ["SEL"]
+py-modules = ["splel"]
 
 [tool.setuptools.dynamic]
 version = { file = "res/common/ver_pure.txt" }
