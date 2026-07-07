@@ -2,7 +2,7 @@
 ---
 The Simple Event Library (SEL) is a lightweight event handling library for Python >= 3.6 and C/C++. It provides a simple and efficient way to manage events and event handlers.
 
-Current version: 1.0.0 (see `res/common/ver.txt`)
+Current version: 1.0.4 (see `res/common/ver.txt`)
 
 ## Installation
 
@@ -22,7 +22,7 @@ pip install SimpleELpy==1.0.3
 ### Python
 Use SEL on Python like this:
 ```python
-import SEL
+import SimplEL as SEL
 
 def foo(*args):
     a = args[0]
