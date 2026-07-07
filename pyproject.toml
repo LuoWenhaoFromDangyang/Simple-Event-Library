@@ -18,7 +18,7 @@ classifiers = [
 ]
 
 [tool.setuptools]
-py-modules = ["SimplEL"]
+py-modules = ["SEL"]
 
 [tool.setuptools.dynamic]
 version = { file = "res/common/ver_pure.txt" }
