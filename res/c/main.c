@@ -25,12 +25,15 @@ extern "C" {
         SEL_EventFuncs = (void(***)(va_list))malloc(bytes_funcs);
         if (!SEL_EventFuncs) {
             free(SEL_EventNames);
+            SEL_EventNames = NULL;
             return -1;
         }
         SEL_EventFuncCount = (size_t*)malloc(bytes_counts);
         if (!SEL_EventFuncCount) {
             free(SEL_EventNames);
+            SEL_EventNames = NULL;
             free(SEL_EventFuncs);
+            SEL_EventFuncs = NULL;
             return -1;
         }
         for (size_t i = 0; i < init_events; i++) {
@@ -42,6 +45,10 @@ extern "C" {
         return 0;
     }
     int SEL_AddEvent(const char* name) {
+        if (!name) return -1;
+        for (size_t i = 0; i < SEL_EventCount; i++) {
+            if (!strcmp(SEL_EventNames[i], name)) return -1;
+        }
         size_t max_events = SEL_EventCapacity / sizeof(char*);
         if (SEL_EventCount >= max_events) {
             if (SEL_EventCapacity > SIZE_MAX / 2) return -1;
@@ -84,6 +91,8 @@ extern "C" {
             if (!strcmp(SEL_EventNames[i], name)) {
                 free(SEL_EventNames[i]);
                 free(SEL_EventFuncs[i]);
+                SEL_EventNames[i] = NULL;
+                SEL_EventFuncs[i] = NULL;
                 for (size_t j = i; j < SEL_EventCount - 1; j++) {
                     SEL_EventNames[j] = SEL_EventNames[j + 1];
                     SEL_EventFuncs[j] = SEL_EventFuncs[j + 1];
@@ -101,8 +110,8 @@ extern "C" {
     int SEL_ClearEvents(void) {
         for (size_t i = 0; i < SEL_EventCount; i++) {
             free(SEL_EventNames[i]);
-            SEL_EventNames[i] = NULL;
             free(SEL_EventFuncs[i]);
+            SEL_EventNames[i] = NULL;
             SEL_EventFuncs[i] = NULL;
             SEL_EventFuncCount[i] = 0;
         }
@@ -139,7 +148,7 @@ extern "C" {
         }
         return -1;
     }
-    int SEL_Trigger(const char* name, va_list args) {
+    int SEL_TriggerV(const char* name, va_list args) {
         for (size_t i = 0; i < SEL_EventCount; i++) {
             if (!strcmp(SEL_EventNames[i], name)) {
                 for (size_t j = 0; j < SEL_EventFuncCount[i]; j++) {
@@ -153,7 +162,7 @@ extern "C" {
         }
         return -1;
     }
-    int SEL_TriggerV(const char* name, ...) {
+    int SEL_Trigger(const char* name, ...) {
         va_list args;
         va_start(args, name);
         int result = SEL_Trigger(name, args);

@@ -10,7 +10,7 @@ class Events:
         if not isinstance(event, str):
             raise ValueError("Event must be a string")
         if event not in event_list:
-            event_list.update({event: set()})
+            event_list.update({event: list()})
     @staticmethod
     def remove_event(event: str):
         if not isinstance(event, str):
@@ -32,7 +32,7 @@ class Events:
         if event not in event_list:
             raise ValueError("Event not found")
         if func not in event_list[event]:
-            event_list[event].add(func)
+            event_list[event].append(func)
     @staticmethod
     def unbind(event: str, func: Callable):
         if not isinstance(event, str):
@@ -49,5 +49,7 @@ class Events:
             raise ValueError("Event must be a string")
         if event not in event_list:
             raise ValueError("Event not found")
+        l = []
         for func in event_list[event]:
-            func(*args, **kwargs)
+            l.append(func(*args, **kwargs))
+        return l

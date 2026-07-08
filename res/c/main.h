@@ -74,11 +74,11 @@
                 int ClearEvents() noexcept { return SEL_ClearEvents(); }
                 int Bind(const char* name, void(*func)(va_list)) noexcept { return SEL_Bind(name, func); }
                 int Unbind(const char* name, void(*func)(va_list)) noexcept { return SEL_Unbind(name, func); }
-                int Trigger(const char* name, va_list args) noexcept { return SEL_Trigger(name, args); }
+                int TriggerV(const char* name, va_list args) noexcept { return SEL_TriggerV(name, args); }
                 int Trigger(const char* name, ...) noexcept {
                     va_list args;
                     va_start(args, name);
-                    int ret = SEL_Trigger(name, args);
+                    int ret = SEL_TriggerV(name, args);
                     va_end(args);
                     return ret;
                 }
