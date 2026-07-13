@@ -2,7 +2,7 @@
 ---
 The Simple Event Library (SEL) is a lightweight event handling library for Python >= 3.6 and C/C++. It provides a simple and efficient way to manage events and event handlers.
 
-Current version: 1.0.4141 (see `res/common/ver.txt`)
+Current version: 1.0.4142 (see `res/common/ver.txt`)
 
 ## Installation
 
@@ -14,7 +14,7 @@ pip install .
 ```
 Or:
 ```bash
-pip install SimpleELpy==1.0.4141
+pip install SimpleELpy==1.0.4142
 ```
 
 ## Usage
@@ -60,24 +60,19 @@ int main() {
     printf("SEL version: %s\n", SEL_C);
     int val;
     if(val = SEL_Init()) {
-        printf("Failed to initialize SEL.(code %d)\n", val);
-        printf("Please check your RAM usage and try again.\n");
         return 1;
     }
     printf("Successfully initialized SEL.\n");
     if(val = SEL_AddEvent("foo")) {
-        printf("Failed to add event 'foo'.(code %d)\n", val);
-        printf("Please check your RAM usage and try again.\n");
+        SEL_Free();
         return 1;
     }
     if(val = SEL_Bind("foo", foo)) {
-        printf("Failed to bind function 'foo'.(code %d)\n", val);
-        printf("Please check your RAM usage and try again.\n");
+        SEL_Free();
         return 1;
     }
-    if(val = SEL_TriggerV("foo", 0.1, 0.2)) {
-        printf("Failed to trigger event 'foo'.(code %d)\n", val);
-        printf("Please check your RAM usage and try again.\n");
+    if(val = SEL_Trigger("foo", 0.1, 0.2)) {
+        SEL_Free();
         return 1;
     }
     SEL_Free();
@@ -103,30 +98,24 @@ void foo(va_list args) {
 
 int main() {
     std::cout << "SEL version: " << SEL_C << std::endl;
-    SEL::Events events;
     int val;
-    if(val = events.Init()) {
-        std::cout << "Failed to initialize SEL.(code " << val << ")\n";
-        std::cout << "Please check your RAM usage and try again.\n";
+    if(val = SEL::Events.Init()) {
         return 1;
     }
     std::cout << "Successfully initialized SEL.\n";
-    if(val = events.AddEvent("foo")) {
-        std::cout << "Failed to add event 'foo'.(code " << val << ")\n";
-        std::cout << "Please check your RAM usage and try again.\n";
+    if(val = SEL::Events.AddEvent("foo")) {
+        SEL::Events.Free();
         return 1;
     }
-    if(val = events.Bind("foo", foo)) {
-        std::cout << "Failed to bind function 'foo'.(code " << val << ")\n";
-        std::cout << "Please check your RAM usage and try again.\n";
+    if(val = SEL::Events.Bind("foo", foo)) {
+        SEL::Events.Free();
         return 1;
     }
-    if(val = events.Trigger("foo", 0.1, 0.2)) {
-        std::cout << "Failed to trigger event 'foo'.(code " << val << ")\n";
-        std::cout << "Please check your RAM usage and try again.\n";
+    if(val = SEL::Events.Trigger("foo", 0.1, 0.2)) {
+        SEL::Events.Free();
         return 1;
     }
-    events.Free();
+    SEL::Events.Free();
     std::cout << "SEL freed.\n";
     return 0;
 }

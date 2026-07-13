@@ -1,8 +1,7 @@
 import os
 import pathlib
 from typing import Callable
-SEL_PY: str = 'Unknown'
-exec(open(os.path.join(os.path.dirname(os.path.dirname(pathlib.Path(__file__).resolve())), 'common', 'ver.txt')).read())
+SEL_PY: str = open(os.path.join(os.path.dirname(os.path.dirname(pathlib.Path(__file__).resolve())), 'common', 'ver_pure.txt')).read()
 event_list = dict()
 class Events:
     @staticmethod
